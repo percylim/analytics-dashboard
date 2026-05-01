@@ -79,6 +79,25 @@ def safe_int(value, default=0):
             return default
     return default
 
+def check_password():
+    if st.session_state.get("authenticated", False):
+        return True
+    
+    st.title("🔐 Analytics Dashboard Login")
+    password = st.text_input("Enter access password:", type="password")
+    if st.button("Login"):
+        # Change this to your own password!
+        if password == "codesquad2024":
+            st.session_state.authenticated = True
+            st.rerun()
+        else:
+            st.error("Incorrect password")
+    return False
+
+# In main(), add this right after the function starts:
+if not check_password():
+    st.stop()
+
 def main():
     # Sidebar
     with st.sidebar:
