@@ -17,9 +17,9 @@ except ImportError:
 # Import your existing client
 from analytics_client_clean import AnalyticsClient
 
-# Page configuration - MUST be first Streamlit command
+# Page configuration - UPDATED
 st.set_page_config(
-    page_title="Code Squad Analytics Dashboard",
+    page_title="CS Analytics Dashboard",  # ← CHANGED
     page_icon="📊",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -32,7 +32,7 @@ def check_password():
     if st.session_state.get("authenticated", False):
         return True
     
-    st.title("🔐 Code Squad Analytics")
+    st.title("🔐 CS Analytics")  # ← CHANGED (optional)
     st.markdown("### Please login to access the dashboard")
     st.markdown("---")
     
@@ -40,10 +40,9 @@ def check_password():
         password = st.text_input("Enter Password", type="password", placeholder="Enter your password")
         col1, col2 = st.columns([1, 5])
         with col1:
-            submit = st.form_submit_button("Login", use_container_width=True)
+            submit = st.form_submit_button("Login", width="stretch")
         
         if submit:
-            # CHANGE THIS PASSWORD TO YOUR OWN!
             if password == "codesquad2024":
                 st.session_state.authenticated = True
                 st.success("Login successful! Redirecting...")
@@ -97,9 +96,9 @@ def main():
     if not check_password():
         st.stop()
     
-    # Sidebar
+    # Sidebar - UPDATED
     with st.sidebar:
-        st.title("📊 Code Squad Analytics")
+        st.title("📊 CS Analytics")  # ← CHANGED
         
         # Company selector
         company_id = st.text_input("Company ID", value="codesquad")
@@ -115,13 +114,13 @@ def main():
         
         col1, col2 = st.columns(2)
         with col1:
-            if st.button("📥 CSV", use_container_width=True):
+            if st.button("📥 CSV", width="stretch"):
                 client = get_client()
                 client.export_to_csv(company_id)
                 st.success("CSV exported!")
         
         with col2:
-            if st.button("📊 Excel", use_container_width=True):
+            if st.button("📊 Excel", width="stretch"):
                 if OPENPYXL_AVAILABLE:
                     client = get_client()
                     client.export_to_excel_pandas(company_id)
@@ -132,8 +131,8 @@ def main():
         st.markdown("---")
         st.markdown(f"**Last Updated:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     
-    # Main content area
-    st.title("📈 Code Squad Accounting Dashboard")
+    # Main content area - UPDATED
+    st.title("📈 CS Analytics Dashboard")  # ← CHANGED
     st.markdown("---")
     
     # Fetch data
@@ -214,7 +213,7 @@ def main():
                 )
                 fig.update_traces(texttemplate='RM %{text:,.0f}', textposition='outside')
                 fig.update_layout(height=450, title_x=0.5)
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig, width="stretch")
             else:
                 st.info("No valid amount data available for chart")
         else:
@@ -235,7 +234,7 @@ def main():
                 )
                 fig.update_traces(textposition='inside', textinfo='percent+label')
                 fig.update_layout(height=450, title_x=0.5)
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig, width="stretch")
             else:
                 st.info("No revenue data by status available")
         else:
@@ -259,7 +258,7 @@ def main():
         if available_columns:
             st.dataframe(
                 display_df[available_columns],
-                use_container_width=True,
+                width="stretch",
                 height=400,
                 hide_index=True
             )
