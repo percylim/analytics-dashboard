@@ -7,7 +7,5 @@ __pycache__/
 .DS_Store
 venv/
 .env
-invoices_*.csv
-dashboard_*.json
-dashboard_*.xlsx
-invoices_fixed.csv
+invoices_*
+dashboard_*
