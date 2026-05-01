@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.json
+*.csv
+*.xlsx
+*.log
+.DS_Store
+venv/
+.env
+invoices_*.csv
+dashboard_*.json
+dashboard_*.xlsx
+invoices_fixed.csv
